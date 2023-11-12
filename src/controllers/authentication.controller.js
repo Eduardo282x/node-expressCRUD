@@ -8,7 +8,7 @@ const getUsers = async (req, res) =>{
         const result = await connection.query(`SELECT * FROM users WHERE UserName='${UserName}' and UserPassword='${UserPassword}'`);
         // console.log(result);
         if(result.length > 0){
-            res.json({message:'Bienvenido', success: true});
+            res.json({message:'Bienvenido', success: true, userData: result[0]});
         } else {
             res.json({message:'Usuario no encontrado', success: false});
         }
