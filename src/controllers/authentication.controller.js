@@ -1,11 +1,11 @@
 import { getConnection }  from '../database/database'
 
-const getRoles = async (req, res) =>{
+const getUsers = async (req, res) =>{
     const connection = await getConnection();
-    const result = await connection.query('SELECT * FROM roles');
+    const result = await connection.query('SELECT UserName, UserPassword FROM users');
     res.json(result);
 }
 
 export const methods = {
-    getRoles
+    getUsers
 };
