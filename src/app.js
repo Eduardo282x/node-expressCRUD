@@ -4,6 +4,7 @@ import cors from "cors"
 import usersRouter from './routes/users.routes'
 import rolesRouter from './routes/roles.routes'
 import authenticationRouter from './routes/authentication.routes'
+import inventoryRouter from './routes/inventory.routes'
 
 const app = express();
 
@@ -16,8 +17,9 @@ app.use(express.json())
 app.use(cors());
 
 // Routes
-app.use('/api/users',usersRouter)
-app.use('/api/roles',rolesRouter)
-app.use('/api/authentication',authenticationRouter)
+app.use('/api/users',usersRouter);
+app.use('/api/roles',rolesRouter);
+app.use('/api/authentication',authenticationRouter);
+app.use('/api/inventory',inventoryRouter);
 
 export default app;
