@@ -3,6 +3,6 @@ import { methods as authenticationControllers } from "../controllers/authenticat
 
 const router=Router();
 
-router.get('/', authenticationControllers.getUsers)
+router.post('/', authenticationControllers.getUsers)
 
 export default router;

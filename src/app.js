@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-
+import cors from "cors"
 import usersRouter from './routes/users.routes'
 import rolesRouter from './routes/roles.routes'
 import authenticationRouter from './routes/authentication.routes'
@@ -13,6 +13,7 @@ app.set("port",3000);
 // Middlewares
 app.use(morgan("dev"))
 app.use(express.json())
+app.use(cors());
 
 // Routes
 app.use('/api/users',usersRouter)
