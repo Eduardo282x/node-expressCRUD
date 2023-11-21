@@ -14,8 +14,10 @@ const getUsers = async (req, res) =>{
 
 const addUsers = async (req, res) =>{
     try {
-        const { Name, Lastname, UserName, UserPassword,Rol} = req.body;
-        const newUser = { Name, Lastname, UserName, UserPassword, Rol}
+        const { Name, Lastname, UserName} = req.body;
+        const newUser = { Name, Lastname, UserName}
+        newUser.Rol = 2;
+        newUser.UserPassword = 123;
         const connection = await getConnection();
         await connection.query('INSERT INTO users set ?', newUser);
         res.json({message: 'Usuario Agregado'});
