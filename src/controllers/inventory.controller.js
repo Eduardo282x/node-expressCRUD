@@ -2,7 +2,7 @@ import { getConnection }  from '../database/database'
 
 const getInventory = async (req, res) =>{
     const connection = await getConnection();
-    const result = await connection.query('SELECT inventory.Id, inventory.Description, inventory.Amount, aulas.Aula AS Classroom, users.Name as Professor, inventory.Date  FROM inventory left join aulas on inventory.Classroom = aulas.Id left join users on inventory.Professor = users.Id');
+    const result = await connection.query('SELECT * FROM inventory');
     res.json(result);
 }
 
