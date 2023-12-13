@@ -15,6 +15,8 @@ const getReserve = async (req, res) =>{
 const addReserve = async (req, res) =>{
     const { IdProfesor, IdInventario, Uses, HourStart, HourEnd} = req.body;
     const newReserve = { IdProfesor, IdInventario, Uses, HourStart, HourEnd }
+    newReserve.HourStart = parseTime(newReserve.HourStart);
+    newReserve.HourEnd = parseTime(newReserve.HourEnd);
     const connection = await getConnection();
     const result = await connection.query('INSERT INTO reserve set ?', newReserve);
     // res.json(result);
@@ -33,6 +35,13 @@ const deleteReserve = async (req, res) =>{
         res.status(500)
         res.send(err.message)
     }
+}
+
+const parseTime = (hora) => {
+    const fechaActual = new Date();
+    const [horas, minutos] = hora.split(':');
+    const fechaFormateada = `${fechaActual.getFullYear()}-${fechaActual.getMonth() + 1}-${fechaActual.getDate()} ${horas}:${minutos}:00`;
+    return fechaFormateada;
 }
 
 export const methods = {
