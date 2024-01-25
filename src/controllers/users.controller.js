@@ -31,12 +31,27 @@ const addUsers = async (req, res) =>{
 const updateUsers = async (req, res) =>{
     try {
         const { Id } = req.params; 
-        const { Name, Lastname, UserName, UserPassword, Rol } = req.body;
-        const UpdateUser = { Name, Lastname,UserName,UserPassword,Rol}
+        const { Name, Lastname, UserName } = req.body;
+        const UpdateUser = { Name, Lastname, UserName };
         const connection = await getConnection();
         const result = await connection.query('UPDATE users set ? WHERE Id = ?', [UpdateUser, Id]);
         console.log(result);
         res.json({message: 'Usuario Editado'});
+    }
+    catch (err) {
+        res.status(500)
+        res.send(err.message)
+    }
+}
+const updateOneUser = async (req, res) =>{
+    try {
+        const { Id } = req.params; 
+        const { Name ,Lastname ,UserName , UserPassword } = req.body;
+        const UpdateOneUser = { Name, Lastname, UserName, UserPassword };
+        const connection = await getConnection();
+        const result = await connection.query('UPDATE users set ? WHERE Id = ?', [UpdateOneUser, Id]);
+        console.log(result);
+        res.json({message: 'Usuario Actualizado.'});
     }
     catch (err) {
         res.status(500)
@@ -63,5 +78,6 @@ export const methods = {
     getUsers,
     addUsers,
     deleteUsers,
-    updateUsers
+    updateOneUser,
+    updateUsers,
 };

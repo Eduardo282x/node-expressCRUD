@@ -8,7 +8,7 @@ const getUsers = async (req, res) =>{
         const { UserName, UserPassword } = req.body;
         const User = { UserName, UserPassword,}
         const connection = await getConnection();
-        const result = await connection.query(`SELECT * FROM users WHERE UserName='${UserName}' and UserPassword='${UserPassword}'`);
+        const result = await connection.query(`SELECT users.Id, users.Name, users.Lastname, users.UserName, users.Rol, roles.Rol as RolDes FROM users join roles on users.Rol = roles.Id WHERE UserName='${UserName}' and UserPassword='${UserPassword}'`);
         // console.log(result);
         if(result.length > 0){
             const parseJsonString = JSON.stringify(result[0])
