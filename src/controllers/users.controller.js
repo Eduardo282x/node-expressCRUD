@@ -14,8 +14,10 @@ const getUsers = async (req, res) =>{
 
 const addUsers = async (req, res) =>{
     try {
-        const { Name, Lastname, UserName, UserPassword,Rol} = req.body;
-        const newUser = { Name, Lastname, UserName, UserPassword, Rol}
+        const { Name, Lastname, UserName} = req.body;
+        const newUser = { Name, Lastname, UserName}
+        newUser.Rol = 2;
+        newUser.UserPassword = 123;
         const connection = await getConnection();
         await connection.query('INSERT INTO users set ?', newUser);
         res.json({message: 'Usuario Agregado'});
@@ -29,12 +31,27 @@ const addUsers = async (req, res) =>{
 const updateUsers = async (req, res) =>{
     try {
         const { Id } = req.params; 
-        const { Name, Lastname, UserName, UserPassword, Rol } = req.body;
-        const UpdateUser = { Name, Lastname,UserName,UserPassword,Rol}
+        const { Name, Lastname, UserName } = req.body;
+        const UpdateUser = { Name, Lastname, UserName };
         const connection = await getConnection();
         const result = await connection.query('UPDATE users set ? WHERE Id = ?', [UpdateUser, Id]);
         console.log(result);
         res.json({message: 'Usuario Editado'});
+    }
+    catch (err) {
+        res.status(500)
+        res.send(err.message)
+    }
+}
+const updateOneUser = async (req, res) =>{
+    try {
+        const { Id } = req.params; 
+        const { Name ,Lastname ,UserName , UserPassword } = req.body;
+        const UpdateOneUser = { Name, Lastname, UserName, UserPassword };
+        const connection = await getConnection();
+        const result = await connection.query('UPDATE users set ? WHERE Id = ?', [UpdateOneUser, Id]);
+        console.log(result);
+        res.json({message: 'Usuario Actualizado.'});
     }
     catch (err) {
         res.status(500)
@@ -61,5 +78,6 @@ export const methods = {
     getUsers,
     addUsers,
     deleteUsers,
-    updateUsers
+    updateOneUser,
+    updateUsers,
 };

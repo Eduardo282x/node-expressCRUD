@@ -5,6 +5,7 @@ import usersRouter from './routes/users.routes'
 import rolesRouter from './routes/roles.routes'
 import authenticationRouter from './routes/authentication.routes'
 import inventoryRouter from './routes/inventory.routes'
+import reserveRouter from './routes/reserve.routes'
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use('/api/users',usersRouter);
 app.use('/api/roles',rolesRouter);
 app.use('/api/authentication',authenticationRouter);
 app.use('/api/inventory',inventoryRouter);
+app.use('/api/reserve',reserveRouter);
 
 export default app;
