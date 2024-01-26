@@ -3,7 +3,7 @@ import { getConnection }  from '../database/database'
 const getUsers = async (req, res) =>{
     try {
         const connection = await getConnection();
-        const result = await connection.query('SELECT users.Id, users.Name, users.Lastname, users.UserName, users.UserPassword, roles.Rol as Rol FROM users join roles on users.Rol = roles.id');
+        const result = await connection.query('SELECT users.Id, users.Name, users.Lastname, users.UserName, users.UserPassword, roles.Rol as Rol FROM users join roles on users.Rol = roles.id where users.Rol  != 1');
         res.json(result);
     }
     catch (err) {
